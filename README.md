@@ -1,8 +1,14 @@
 # Task Tracker
 
+This is a practice project for [Task Tracker](https://roadmap.sh/projects/task-tracker).
+
 ## Usage
 
+### Get Started
+
 ```bash
+git clone https://github.com/moneychien19/task-tracker-go.git
+cd task-tracker-go
 go build -o main
 ```
 
