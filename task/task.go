@@ -2,8 +2,12 @@ package task
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"time"
+
+	"github.com/charmbracelet/lipgloss"
+	"github.com/charmbracelet/lipgloss/table"
 )
 
 const (
@@ -117,7 +121,7 @@ func ChangeTaskStatus(id int64, status string) (error) {
 	return writeTasksToJson(existedTasks)
 }
 
-func ListTasks(status string) ([]Task, error) {
+func GetTasks(status string) ([]Task, error) {
 	tasks, err := readTasksFromJson()
 	if err != nil {
 		return nil, err
@@ -134,4 +138,27 @@ func ListTasks(status string) ([]Task, error) {
 	}
 
 	return tasks, err
+}
+
+func RenderTaskTables(tasks []Task) {
+	tasksInString := make([][]string, 0)
+	for _, t := range tasks {
+		tasksInString = append(
+			tasksInString, 
+			[]string{
+				fmt.Sprintf("%d", t.Id), 
+				t.Description, 
+				t.Status, 
+				t.CreatedAt.Format(time.DateTime), 
+				t.UpdatedAt.Format(time.DateTime),
+			})
+	}
+
+	t := table.New().
+    Border(lipgloss.NormalBorder()).
+    BorderStyle(lipgloss.NewStyle().Foreground(lipgloss.Color("99"))).
+    Headers("ID", "Description", "Status", "Created At", "Updated At").
+    Rows(tasksInString...)
+	
+	fmt.Print(t)
 }

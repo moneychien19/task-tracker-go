@@ -24,7 +24,7 @@ func TestAddTaskToJson(t *testing.T) {
 		t.Fatalf("Expected no error, got %v", err)
 	}
 
-	tasks, err := task.ListTasks("")
+	tasks, err := task.GetTasks("")
 	if err != nil {
 		t.Fatalf("Expected no error, got %v", err)
 	}
@@ -48,7 +48,7 @@ func TestUpdateTaskToJson(t *testing.T) {
 		t.Fatalf("Expected no error, got %v", err)
 	}
 
-	tasks, err := task.ListTasks("")
+	tasks, err := task.GetTasks("")
 	if err != nil {
 		t.Fatalf("Expected no error, got %v", err)
 	}
@@ -68,7 +68,7 @@ func TestDeleteTaskFromJson(t *testing.T) {
 		t.Fatalf("Expected no error, got %v", err)
 	}
 
-	tasks, err := task.ListTasks("")
+	tasks, err := task.GetTasks("")
 	if err != nil {
 		t.Fatalf("Expected no error, got %v", err)
 	}
@@ -88,7 +88,7 @@ func TestChangeTaskStatus(t *testing.T) {
 		t.Fatalf("Expected no error, got %v", err)
 	}
 
-	tasks, err := task.ListTasks("")
+	tasks, err := task.GetTasks("")
 	if err != nil {
 		t.Fatalf("Expected no error, got %v", err)
 	}
@@ -106,7 +106,7 @@ func TestListTasks(t *testing.T) {
 	task.AddTaskToJson(2, "Test Task 2")
 	task.ChangeTaskStatus(2, task.StatusDone)
 
-	tasks, err := task.ListTasks(task.StatusDone)
+	tasks, err := task.GetTasks(task.StatusDone)
 	if err != nil {
 		t.Fatalf("Expected no error, got %v", err)
 	}

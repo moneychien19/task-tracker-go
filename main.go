@@ -68,13 +68,11 @@ func main() {
 				}
 			case "list":
 				status := cCtx.Args().Get(1)
-				tasks, err := task.ListTasks(status)
+				tasks, err := task.GetTasks(status)
 				if err != nil {
 					return err
 				}
-				for _, t := range tasks {
-					fmt.Printf("ID: %d, Description: %s, Status: %s, Created At: %s, Updated At: %s\n", t.Id, t.Description, t.Status, t.CreatedAt, t.UpdatedAt)
-				}
+				task.RenderTaskTables(tasks)
 			}				
 			return nil
 		},
